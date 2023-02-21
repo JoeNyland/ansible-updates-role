@@ -1,0 +1,21 @@
+---
+- name: Check if reboot is required
+  stat:
+    path: /var/run/reboot-required
+  register: reboot_required_check_output
+  listen: Reboot if required
+
+- name: Print warning
+  fail:
+    msg: A reboot is required to apply updates
+  when:
+    - not updates_reboot_allowed
+    - reboot_required_check_output.stat.exists
+  listen: Reboot if required
+
+- name: Reboot
+  reboot:
+  when:
+    - updates_reboot_allowed
+    - reboot_required_check_output.stat.exists
+  listen: Reboot if required
