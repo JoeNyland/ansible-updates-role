@@ -22,9 +22,10 @@ jobs:
       fail-fast: false # If tests fail in one image, we still want the others to carry on running
       matrix:
         image:
-          - geerlingguy/docker-debian11-ansible # bullseye (stable)
-          - geerlingguy/docker-debian10-ansible # buster (oldstable)
-          - geerlingguy/docker-debian9-ansible # stretch LTS (oldoldstable)
+          - geerlingguy/docker-debian12-ansible # bookworm (stable)
+          - geerlingguy/docker-debian11-ansible # bullseye (oldstable)
+          - geerlingguy/docker-debian10-ansible # buster (oldoldstable)
+          - geerlingguy/docker-debian9-ansible # stretch
     steps:
       - name: Checkout
         uses: actions/checkout@v3
